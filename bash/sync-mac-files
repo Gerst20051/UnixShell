@@ -1,0 +1,71 @@
+#!/bin/bash
+
+
+# Download Bash Settings
+
+curl https://raw.github.com/Gerst20051/dotfiles/master/.bash_profile > ~/.bash_profile
+curl https://raw.github.com/Gerst20051/dotfiles/master/.bash_aliases > ~/.bash_aliases
+
+source ~/.bash_profile
+
+
+# Download, Unzip, Open, and Remove Applications
+
+scp gerst@login.cs.unc.edu:mac/SizeUp.zip ~/SizeUp.zip &&
+unzip ~/SizeUp &&
+open -a ~/SizeUp -h &&
+rm ~/SizeUp.zip
+
+scp gerst@login.cs.unc.edu:mac/Cinch.zip ~/Cinch.zip &&
+unzip ~/Cinch &&
+open -a ~/Cinch -h &&
+rm ~/Cinch.zip
+
+scp gerst@login.cs.unc.edu:mac/iTerm.zip ~/iTerm.zip &&
+unzip iTerm &&
+open -a iTerm -h &&
+rm ~/iTerm.zip
+
+scp gerst@login.cs.unc.edu:mac/Spotify.zip ~/Spotify.zip &&
+unzip Spotify &&
+open -a Spotify -h &&
+rm ~/Spotify.zip
+
+scp gerst@login.cs.unc.edu:mac/Pinger.zip ~/Pinger.zip &&
+unzip ~/Pinger &&
+open -a ~/Pinger -h &&
+rm ~/Pinger.zip
+
+scp gerst@login.cs.unc.edu:mac/Sublime.zip ~/Sublime.zip &&
+unzip ~/Sublime &&
+open -a ~/Sublime -h &&
+rm ~/Sublime.zip
+
+
+# Personalize Settings
+
+# Add a "Recent Applications" Stack to the Dock
+defaults write com.apple.dock persistent-others -array-add '{ "tile-data" = { "list-type" = 1; viewas = 3; }; "tile-type" = "recents-tile"; }';
+
+# Add a "Recent Files" Stack to the Dock
+defaults write com.apple.dock persistent-others -array-add '{ "tile-data" = { "list-type" = 2; viewas = 3; }; "tile-type" = "recents-tile"; }';
+
+# Alter List View in Stacks to be More Like Grid View
+defaults write com.apple.dock use-new-list-stack -bool yes;
+
+# Turn on Stacks Highlights
+defaults write com.apple.dock mouse-over-hilite-stack -boolean yes;
+
+# Disable Dashboard
+defaults write com.apple.dashboard mcx-disabled -boolean yes;
+
+# Enable the Path View in Finder
+defaults write com.apple.finder FXShowPosixPathInTitle -bool yes;
+
+# Reset Dock
+killall Dock
+
+
+# Welcome Message
+
+say "Welcome Master Andrew"
