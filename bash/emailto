@@ -21,21 +21,10 @@ function sendemail {
 if [[ -f "$MES" ]]; then
 	sendemail < "$MES"
 else
-	echo $3
-	echo ${3}
-	echo "$3"
-	echo "${3}"
-	echo `esc $3` # breaks space
-	echo `esc "$3"`
-	echo `esc ${3}` # breaks space
-	echo `esc "${3}"`
-	echo "`esc $3`" # breaks space
-	echo "`esc \"$3\"`"
-	echo `myesc $3` # breaks space
-	echo `myesc "$3"`
-	echo `myesc ${3}` # breaks space
-	echo `myesc "${3}"`
-	echo "`myesc $3`" # breaks space
-	echo "`myesc \"$3\"`"
-	echo "`myesc \"$3\"`" | sendemail
+        if [ $# -eq 4 ]; then
+		sendemail < ~/email/tmp.txt
+		rm ~/email/tmp.txt
+	elif [ $# -eq 3 ]; then
+		echo "`myesc \"$3\"`" | sendemail
+	fi
 fi
