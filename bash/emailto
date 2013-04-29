@@ -1,0 +1,41 @@
+#!/bin/bash
+
+TO="$1"
+SUB="$2"
+MES="$3"
+
+function esc(){
+	local escaped="'\''"
+	echo "${1//\'/$escaped}"
+}
+
+function myesc {
+	local escaped="\'"
+	echo "${1//\'/$escaped}"
+}
+
+function sendemail {
+	mailx -s "$SUB" "$TO"
+}	
+
+if [[ -f "$MES" ]]; then
+	sendemail < "$MES"
+else
+	echo $3
+	echo ${3}
+	echo "$3"
+	echo "${3}"
+	echo `esc $3` # breaks space
+	echo `esc "$3"`
+	echo `esc ${3}` # breaks space
+	echo `esc "${3}"`
+	echo "`esc $3`" # breaks space
+	echo "`esc \"$3\"`"
+	echo `myesc $3` # breaks space
+	echo `myesc "$3"`
+	echo `myesc ${3}` # breaks space
+	echo `myesc "${3}"`
+	echo "`myesc $3`" # breaks space
+	echo "`myesc \"$3\"`"
+	echo "`myesc \"$3\"`" | sendemail
+fi

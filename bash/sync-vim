@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Download VIM Settings and Colors
+
+curl https://raw.github.com/Gerst20051/dotfiles/master/.vimrc > ~/.vimrc
+
+colors=('distinguished' 'grb256' 'jellybeans' 'railcasts' 'solarized' 'vividchalk');
+
+for color in "${colors[@]}"; do
+        curl https://raw.github.com/Gerst20051/dotfiles/master/.vim/colors/$color.vim > ~/.vim/colors/$color.vim
+done
+
+echo "vim sync complete"

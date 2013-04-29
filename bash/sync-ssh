@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Download SSH Config
+
+curl https://raw.github.com/Gerst20051/dotfiles/master/.ssh/config > ~/.ssh/config
+
+echo "ssh sync complete"

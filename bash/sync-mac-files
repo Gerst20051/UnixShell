@@ -1,12 +1,11 @@
 #!/bin/bash
 
 
-# Download Bash Settings
+./sync-bash
+./sync-ssh
+./sync-vim
+./sync-sublime
 
-curl https://raw.github.com/Gerst20051/dotfiles/master/.bash_profile > ~/.bash_profile
-curl https://raw.github.com/Gerst20051/dotfiles/master/.bash_aliases > ~/.bash_aliases
-
-source ~/.bash_profile
 
 
 # Download, Unzip, Open, and Remove Applications

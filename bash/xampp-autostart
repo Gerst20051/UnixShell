@@ -1,0 +1,4 @@
+#!/bin/bash
+
+sudo -S /applications/xampp/xamppfiles/xampp startapache
+sudo -S /applications/xampp/xamppfiles/xampp startmysql
