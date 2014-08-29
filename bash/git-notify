@@ -1,0 +1,29 @@
+#!/bin/bash
+
+format_name="--format=%cn"
+format_when="--format=%cr"
+format_summary="--format=%s"
+remote="origin"
+branch="production"
+latest_revision=""
+
+if [ "$#" == "1" ]; then
+	branch="$1"
+fi
+
+while [ 1 ]; do
+	current_revision=`git ls-remote --heads $remote $branch | awk '{print $1}'`
+	if [ "$latest_revision" != "$current_revision" ]; then
+		git fetch $remote $branch
+		repo="${PWD##*/}"
+		latest_revision=$current_revision
+		commit_name=`git log -1 $format_name $latest_revision`
+		commit_when=`git log -1 $format_when $latest_revision`
+		commit_summary=`git log -1 $format_summary $latest_revision`
+		title="$commit_name: $repo"
+		gitlab="http://gitlab.myeasyp.com/passport-parking/$repo/commit/$latest_revision"
+		terminal-notifier -title "$title" 'message "$branch $commit_when"'!'$' \n'"$commit_summary" -open $gitlab
+	fi
+	sleep 60
+done
+
